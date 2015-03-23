@@ -1,6 +1,7 @@
 package qlearn.qualcomm.com.videokeeper;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,6 +28,7 @@ public class VideoDownloader {
        }
    }
 
+    // TODO: setup a lookup table
     private boolean fileExists(String videoUrl) {
         return false;
     }
@@ -52,9 +54,12 @@ public class VideoDownloader {
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.e("File Path", context.getFilesDir().getAbsolutePath() + "/" + s);
+        protected void onPostExecute(String filePath) {
+            super.onPostExecute(filePath);
+            Log.e("File Path",  filePath);
+            Intent intent = new Intent(context, VideoPlayer.class);
+            intent.putExtra("filePath", filePath);
+            context.startActivity(intent);
         }
     }
 }

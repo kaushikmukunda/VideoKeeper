@@ -1,6 +1,5 @@
 package qlearn.qualcomm.com.videokeeper;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.github.axet.vget.VGet;
@@ -14,6 +13,7 @@ import static com.github.axet.vget.info.VideoInfo.*;
 public class DownloadFinishTrigger implements Runnable {
     private VGet vget;
     private VideoInfo videoInfo;
+    private String targetFile;
 
     public DownloadFinishTrigger(VGet vget) {
         this.vget = vget;
@@ -23,11 +23,14 @@ public class DownloadFinishTrigger implements Runnable {
     public void run() {
         videoInfo = vget.getVideo();
         States state = videoInfo.getState();
+        if (state == States.DONE) {
+            targetFile = vget.getTarget().getAbsolutePath();
+        }
         Log.d("State", state.toString());
     }
 
     public String getTitle() {
-        return videoInfo.getTitle();
+        return targetFile;
     }
 
 }

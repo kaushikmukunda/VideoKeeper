@@ -7,6 +7,7 @@
     tools:context="qlearn.qualcomm.com.videokeeper.VideoPlayer">
 
  <VideoView
+     android:id="@+id/videoPlayer"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content" />
 
